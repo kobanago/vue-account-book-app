@@ -44,5 +44,6 @@ module.exports = {
         arrowParameter: true,
       },
     ],
+    'vue/no-v-text-v-html-on-component': 'off',
   },
 };
