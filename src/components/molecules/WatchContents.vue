@@ -1,0 +1,41 @@
+<script setup lang="ts">
+import CalendarEl, { type LogEntry, type DateLogs } from '@/components/elements/CalendarEl.vue';
+import PriceEl from '@/components/elements/PriceEl.vue';
+import TitleEl from '@/components/elements/TitleEl.vue';
+import data from 'samples/features/data/logs.json';
+import { type Ref, ref } from 'vue';
+
+const today: Date = new Date();
+const todayStr: Ref<string> = ref(today.toLocaleDateString());
+const dates: Date[] = data.map((log: DateLogs) => new Date(log.time));
+const recalculateMonthTotal = (
+  year: number = today.getFullYear(),
+  month: number = today.getMonth(),
+) => {
+  const monthLogs: DateLogs[] = data.filter((log: DateLogs) => {
+    const logDate: Date = new Date(log.time);
+    return logDate.getFullYear() === year && logDate.getMonth() === month;
+  });
+  const monthTotal: number = calculateMonthTotal(monthLogs);
+  return monthTotal;
+};
+const calculateMonthTotal = (logs: DateLogs[]) => {
+  return logs.reduce((acc: number, log: DateLogs) => {
+    return acc + log.logs.reduce((logAcc: number, entry: LogEntry) => logAcc + entry.price, 0);
+  }, 0);
+};
+const totalExpense: number = recalculateMonthTotal();
+const incomes: Ref<number> = ref(1000);
+const expenses: Ref<number> = ref(totalExpense);
+</script>
+
+<template>
+  <v-col>
+    <TitleEl :title="`今月の収支(${todayStr}時点)`" />
+    <v-row justify="center">
+      <PriceEl title="収入" :total="incomes" font-color="text-light-green-darken-3" />
+      <PriceEl title="支出" :total="expenses" font-color="text-red-darken-4" />
+    </v-row>
+    <CalendarEl :dates="dates" :date-logs="data" tab="WATCH" />
+  </v-col>
+</template>
