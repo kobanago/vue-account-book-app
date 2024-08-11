@@ -2,18 +2,20 @@
 import CalendarEl, { type LogEntry, type DateLogs } from '@/components/elements/CalendarEl.vue';
 import PriceEl from '@/components/elements/PriceEl.vue';
 import TitleEl from '@/components/elements/TitleEl.vue';
-import data from 'samples/features/data/logs.json';
-import { type Ref, ref } from 'vue';
+import { type Ref, reactive, ref } from 'vue';
 
+// eslint-disable-next-line @typescript-eslint/typedef
+const props = defineProps<{ logs: DateLogs[] }>();
+const data: DateLogs[] = reactive(props.logs);
 const today: Date = new Date();
 const todayStr: Ref<string> = ref(today.toLocaleDateString());
-const dates: Date[] = data.map((log: DateLogs) => new Date(log.time));
+const dates: Date[] = data.map((log: DateLogs) => new Date(log.registered_date));
 const recalculateMonthTotal = (
   year: number = today.getFullYear(),
   month: number = today.getMonth(),
 ) => {
   const monthLogs: DateLogs[] = data.filter((log: DateLogs) => {
-    const logDate: Date = new Date(log.time);
+    const logDate: Date = new Date(log.registered_date);
     return logDate.getFullYear() === year && logDate.getMonth() === month;
   });
   const monthTotal: number = calculateMonthTotal(monthLogs);

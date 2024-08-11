@@ -2,10 +2,13 @@
 import ConsiderContents from '@/components/molecules/ConsiderContents.vue';
 import RecordContents from '@/components/molecules/RecordContents.vue';
 import WatchContents from '@/components/molecules/WatchContents.vue';
+import logsData from 'samples/features/data/logs.json';
 import { type Ref, ref } from 'vue';
+import type { DateLogs } from '../elements/CalendarEl.vue';
 
 const items: Ref<string[]> = ref(['Watch', 'Record', 'Consider']);
 const tab: Ref<string> = ref('Watch');
+const logs: Ref<DateLogs[]> = ref(logsData);
 const text: string =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
 </script>
@@ -26,10 +29,10 @@ const text: string =
         <v-card color="basil" class="bg-amber-lighten-5" flat>
           <v-card-text>{{ text }}</v-card-text>
           <v-card v-if="tab === items[0]">
-            <WatchContents />
+            <WatchContents :logs="logs" />
           </v-card>
           <v-card v-else-if="tab === items[1]">
-            <RecordContents />
+            <RecordContents :logs="logs" />
           </v-card>
           <v-card v-else-if="tab === items[2]">
             <ConsiderContents />
