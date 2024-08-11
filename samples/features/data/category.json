@@ -1,4 +1,5 @@
 [
+  { "id": 0, "category": "選択なし" },
   { "id": 1, "category": "食費" },
   { "id": 2, "category": "日用雑貨費" },
   { "id": 3, "category": "交通費" },

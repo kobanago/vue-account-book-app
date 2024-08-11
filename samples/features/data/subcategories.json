@@ -1,18 +1,23 @@
 [
+  { "id": 0, "subcategories": [{ "id": 0, "category": "選択なし" }] },
   {
     "id": 1,
     "subcategories": [
       {
+        "id": 0,
+        "category": "その他"
+      },
+      {
         "id": 101,
-        "name": "食料品"
+        "category": "食料品"
       },
       {
         "id": 102,
-        "name": "外食"
+        "category": "外食"
       },
       {
         "id": 103,
-        "name": "お菓子・飲み物"
+        "category": "お菓子・飲み物"
       }
     ]
   },
@@ -20,16 +25,20 @@
     "id": 2,
     "subcategories": [
       {
+        "id": 0,
+        "category": "その他"
+      },
+      {
         "id": 201,
-        "name": "洗剤・掃除用具"
+        "category": "洗剤・掃除用具"
       },
       {
         "id": 202,
-        "name": "トイレタリー"
+        "category": "トイレタリー"
       },
       {
         "id": 203,
-        "name": "文房具"
+        "category": "文房具"
       }
     ]
   },
@@ -37,16 +46,20 @@
     "id": 3,
     "subcategories": [
       {
+        "id": 0,
+        "category": "その他"
+      },
+      {
         "id": 301,
-        "name": "電車・バス"
+        "category": "電車・バス"
       },
       {
         "id": 302,
-        "name": "自動車"
+        "category": "自動車"
       },
       {
         "id": 303,
-        "name": "タクシー・配車サービス"
+        "category": "タクシー・配車サービス"
       }
     ]
   },
@@ -54,16 +67,20 @@
     "id": 4,
     "subcategories": [
       {
+        "id": 0,
+        "category": "その他"
+      },
+      {
         "id": 401,
-        "name": "電気料金"
+        "category": "電気料金"
       },
       {
         "id": 402,
-        "name": "ガス料金"
+        "category": "ガス料金"
       },
       {
         "id": 403,
-        "name": "水道料金"
+        "category": "水道料金"
       }
     ]
   },
@@ -71,16 +88,20 @@
     "id": 5,
     "subcategories": [
       {
+        "id": 0,
+        "category": "その他"
+      },
+      {
         "id": 501,
-        "name": "病院・診療費"
+        "category": "病院・診療費"
       },
       {
         "id": 502,
-        "name": "薬・処方箋"
+        "category": "薬・処方箋"
       },
       {
         "id": 503,
-        "name": "健康診断"
+        "category": "健康診断"
       }
     ]
   },
@@ -88,16 +109,20 @@
     "id": 6,
     "subcategories": [
       {
+        "id": 0,
+        "category": "その他"
+      },
+      {
         "id": 601,
-        "name": "宿泊費"
+        "category": "宿泊費"
       },
       {
         "id": 602,
-        "name": "交通費"
+        "category": "交通費"
       },
       {
         "id": 603,
-        "name": "観光・娯楽費"
+        "category": "観光・娯楽費"
       }
     ]
   },
@@ -105,16 +130,20 @@
     "id": 7,
     "subcategories": [
       {
+        "id": 0,
+        "category": "その他"
+      },
+      {
         "id": 701,
-        "name": "外食"
+        "category": "外食"
       },
       {
         "id": 702,
-        "name": "イベント参加費"
+        "category": "イベント参加費"
       },
       {
         "id": 703,
-        "name": "贈答品"
+        "category": "贈答品"
       }
     ]
   }

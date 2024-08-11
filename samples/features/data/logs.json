@@ -1,61 +1,66 @@
 [
   {
     "id": 1,
-    "time": "2024/5/23 12:00:00",
+    "registered_date": "2024/7/23",
+    "timestamp": "2024/7/23 12:00:00",
     "logs": [
-      { "category_id": 101, "price": 10000 },
-      { "category_id": 103, "price": 50000 },
-      { "category_id": 203, "price": 50000 },
-      { "category_id": 301, "price": 50000 },
-      { "category_id": 102, "price": 60000 },
-      { "category_id": 502, "price": 10000 }
+      { "category_id": 1, "subcategory_id": 101, "price": 10000 },
+      { "category_id": 1, "subcategory_id": 103, "price": 50000 },
+      { "category_id": 2, "subcategory_id": 203, "price": 50000 },
+      { "category_id": 3, "subcategory_id": 301, "price": 50000 },
+      { "category_id": 1, "subcategory_id": 102, "price": 60000 },
+      { "category_id": 5, "subcategory_id": 502, "price": 10000 }
     ]
   },
   {
     "id": 2,
-    "time": "2024/5/23 15:00:00",
+    "registered_date": "2024/7/23",
+    "timestamp": "2024/7/23 15:00:00",
     "logs": [
-      { "category_id": 101, "price": 1000 },
-      { "category_id": 103, "price": 3000 },
-      { "category_id": 502, "price": 10000 },
-      { "category_id": 301, "price": 5000 },
-      { "category_id": 102, "price": 7000 },
-      { "category_id": 502, "price": 10000 }
+      { "category_id": 1, "subcategory_id": 101, "price": 1000 },
+      { "category_id": 1, "subcategory_id": 103, "price": 3000 },
+      { "category_id": 5, "subcategory_id": 502, "price": 10000 },
+      { "category_id": 3, "subcategory_id": 301, "price": 5000 },
+      { "category_id": 1, "subcategory_id": 102, "price": 7000 },
+      { "category_id": 5, "subcategory_id": 502, "price": 10000 }
     ]
   },
   {
     "id": 3,
-    "time": "2024/5/22 12:00:00",
+    "registered_date": "2024/7/22",
+    "timestamp": "2024/7/23 15:00:00",
     "logs": [
-      { "category_id": 101, "price": 10000 },
-      { "category_id": 103, "price": 50000 },
-      { "category_id": 203, "price": 50000 },
-      { "category_id": 301, "price": 50000 },
-      { "category_id": 102, "price": 60000 },
-      { "category_id": 502, "price": 10000 }
+      { "category_id": 1, "subcategory_id": 101, "price": 10000 },
+      { "category_id": 1, "subcategory_id": 103, "price": 50000 },
+      { "category_id": 5, "subcategory_id": 502, "price": 50000 },
+      { "category_id": 3, "subcategory_id": 301, "price": 50000 },
+      { "category_id": 1, "subcategory_id": 102, "price": 60000 },
+      { "category_id": 5, "subcategory_id": 502, "price": 10000 }
     ]
   },
   {
     "id": 4,
-    "time": "2024/5/25 12:00:00",
+    "registered_date": "2024/7/25",
+    "timestamp": "2024/7/23 15:00:00",
     "logs": [
-      { "category_id": 101, "price": 1000 },
-      { "category_id": 103, "price": 3000 },
-      { "category_id": 502, "price": 10000 },
-      { "category_id": 301, "price": 5000 },
-      { "category_id": 102, "price": 7000 },
-      { "category_id": 502, "price": 10000 }
+      { "category_id": 1, "subcategory_id": 101, "price": 1000 },
+      { "category_id": 1, "subcategory_id": 103, "price": 3000 },
+      { "category_id": 5, "subcategory_id": 502, "price": 10000 },
+      { "category_id": 3, "subcategory_id": 301, "price": 5000 },
+      { "category_id": 1, "subcategory_id": 102, "price": 7000 },
+      { "category_id": 5, "subcategory_id": 502, "price": 10000 }
     ]
   },
   {
     "id": 5,
-    "time": "2024/6/4 10:00:00",
+    "registered_date": "2024/8/4",
+    "timestamp": "2024/8/10 15:00:00",
     "logs": [
-      { "category_id": 101, "price": 2000 },
-      { "category_id": 203, "price": 4000 },
-      { "category_id": 301, "price": 6000 },
-      { "category_id": 102, "price": 8000 },
-      { "category_id": 601, "price": 10000 }
+      { "category_id": 1, "subcategory_id": 101, "price": 2000 },
+      { "category_id": 2, "subcategory_id": 203, "price": 4000 },
+      { "category_id": 3, "subcategory_id": 301, "price": 6000 },
+      { "category_id": 1, "subcategory_id": 102, "price": 8000 },
+      { "category_id": 6, "subcategory_id": 601, "price": 10000 }
     ]
   }
 ]
