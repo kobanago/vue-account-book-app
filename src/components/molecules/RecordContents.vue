@@ -14,11 +14,25 @@ const dates: Ref<Date[]> = ref(logsData.map((log: DateLogs) => new Date(log.regi
 const targetDate: Ref<string> = ref('');
 const displayTargetDate: Ref<string> = ref('');
 const dataUpdatedCount: Ref<number> = ref(0);
+const btnTextArray: Ref<string[]> = ref(['追加', '編集', '削除']);
 const setDate = (date: CalendarDay) => {
   targetDate.value = date.noonDate.toLocaleDateString();
   displayTargetDate.value = date.ariaLabel;
 };
-const setRecord = (record: LogEntry[]) => {
+const setRecord = (record: LogEntry[], btnText: string) => {
+  switch (btnText) {
+    case btnTextArray.value[0]:
+      createNewData(record);
+      break;
+    case btnTextArray.value[1]:
+      createNewData(record);
+      break;
+    case btnTextArray.value[2]:
+      createNewData(record);
+      break;
+  }
+};
+const createNewData = (record: LogEntry[]) => {
   const newData: DateLogs = {
     id: data.value.length + 1,
     registered_date: targetDate.value,
@@ -32,6 +46,7 @@ const setRecord = (record: LogEntry[]) => {
     dates.value.push(newDate);
   }
 };
+
 watch(data.value, () => {
   dataUpdatedCount.value++;
 });
@@ -41,7 +56,16 @@ watch(data.value, () => {
   <v-col>
     <TitleEl title="記録を編集する" />
     <h3>{{ displayTargetDate ? displayTargetDate : '日付を選択してください' }}</h3>
-    <EditDialog :date="displayTargetDate" @set-saved-record="setRecord" />
+    <v-row justify="center">
+      <v-col v-for="btnText in btnTextArray" :key="btnText">
+        <EditDialog
+          :date="displayTargetDate"
+          :btn-text="btnText"
+          :date-logs="data"
+          @set-saved-record="setRecord"
+        />
+      </v-col>
+    </v-row>
     <CalendarEl
       :dates="dates"
       :date-logs="data"
