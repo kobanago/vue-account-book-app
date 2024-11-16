@@ -6,9 +6,6 @@ import AddDialogContents from './AddDialogContents.vue';
 
 // eslint-disable-next-line @typescript-eslint/typedef
 const props = defineProps<{ date: string; btnText: string; dateLogs: DateLogs[] }>();
-const selectedCategoryId: Ref<number> = ref(0);
-const selectedSubcategoryId: Ref<number> = ref(0);
-const price: Ref<number> = ref(0);
 const emits: (evt: 'setSavedRecord', log: LogEntry[], btnText: string) => void = defineEmits([
   'setSavedRecord',
 ]);
@@ -18,13 +15,6 @@ const setRecord = (record: LogEntry) => {
   recordAry.value.push(record);
   emits('setSavedRecord', recordAry.value, props.btnText);
   alert(`データが${props.btnText}されました！`);
-  initDate();
-};
-const initDate = () => {
-  //初期化
-  price.value = 0;
-  selectedCategoryId.value = 0;
-  selectedSubcategoryId.value = 0;
   recordAry.value = [];
 };
 const parseDate = (dateStr: string) => {

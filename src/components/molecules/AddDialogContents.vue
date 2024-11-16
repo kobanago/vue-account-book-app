@@ -14,6 +14,15 @@ const log: Ref<LogEntry> = ref<LogEntry>({
   category_id: 0,
   subcategory_id: 0,
 });
+const initDate = () => {
+  price.value = 0;
+  selectedCategoryId.value = 0;
+  selectedSubcategoryId.value = 0;
+};
+const clickHandlerAddBtn = () => {
+  emits('addRecord', log.value);
+  initDate();
+};
 
 watch(
   [price, selectedCategoryId, selectedSubcategoryId],
@@ -70,7 +79,7 @@ watch(
       text="SAVE"
       variant="tonal"
       :disabled="!price || 0 >= price"
-      @click="emits('addRecord', log)"
+      @click="clickHandlerAddBtn"
     ></v-btn>
   </v-card>
 </template>
