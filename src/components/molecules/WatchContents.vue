@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import CalendarEl, { type LogEntry, type DateLogs } from '@/components/elements/CalendarEl.vue';
+import type { DateLogs, LogEntry } from '@/common/types';
+import CalendarEl from '@/components/elements/CalendarEl.vue';
 import PriceEl from '@/components/elements/PriceEl.vue';
 import TitleEl from '@/components/elements/TitleEl.vue';
 import { type Ref, reactive, ref } from 'vue';

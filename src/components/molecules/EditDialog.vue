@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { BTN_TEXT } from '@/common/const';
+import type { DateLogs, LogEntry } from '@/common/types';
 import { type Ref, ref } from 'vue';
-import type { DateLogs, LogEntry } from '../elements/CalendarEl.vue';
 import AddDialogContents from './AddDialogContents.vue';
 
 // eslint-disable-next-line @typescript-eslint/typedef

@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import type { DateLogs } from '@/common/types';
 import ConsiderContents from '@/components/molecules/ConsiderContents.vue';
 import RecordContents from '@/components/molecules/RecordContents.vue';
 import WatchContents from '@/components/molecules/WatchContents.vue';
 import logsData from 'samples/features/data/logs.json';
 import { type Ref, ref } from 'vue';
-import type { DateLogs } from '../elements/CalendarEl.vue';
 
 const items: Ref<string[]> = ref(['Watch', 'Record', 'Consider']);
 const tab: Ref<string> = ref('Watch');

@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import type { LogEntry } from '@/common/types';
 import categories from 'samples/features/data/category.json';
 import subcategories from 'samples/features/data/subcategories.json';
 import { type Ref, ref, watch } from 'vue';
-import type { LogEntry } from '../elements/CalendarEl.vue';
 
 defineProps<{ date: string }>();
 const selectedCategoryId: Ref<number> = ref(0);

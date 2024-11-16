@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { BTN_TEXT } from '@/common/const';
-import CalendarEl, { type DateLogs, type LogEntry } from '@/components/elements/CalendarEl.vue';
+import type { DateLogs, LogEntry } from '@/common/types';
 import TitleEl from '@/components/elements/TitleEl.vue';
 import EditDialog from '@/components/molecules/EditDialog.vue';
 import logsData from 'samples/features/data/logs.json';
 import type { CalendarDay } from 'v-calendar/dist/types/src/utils/page.js';
 import { watch } from 'vue';
 import { type Ref, ref } from 'vue';
+import CalendarEl from '../elements/CalendarEl.vue';
 
 // eslint-disable-next-line @typescript-eslint/typedef
 const props = defineProps<{ logs: DateLogs[] }>();
