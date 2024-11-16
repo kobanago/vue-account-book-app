@@ -80,9 +80,9 @@ const setCalendarData = (date: CalendarDay) => {
     (date: Date) => date.toDateString() === targetDay.toDateString(),
   );
 
-  const stringifyArray = (arr: LogEntry[], time: string): string => {
+  const stringifyArray = (arr: LogEntry[]): string => {
     return arr
-      .map((obj: LogEntry, objIndex: number): string => {
+      .map((obj: LogEntry): string => {
         const category: CategoryEntry | undefined = categoryData.find(
           (target: CategoryEntry) => target.id === obj.category_id,
         );
@@ -107,7 +107,7 @@ const setCalendarData = (date: CalendarDay) => {
         });
 
         const entry: string = `${categoryName}：${formattedPrice}`;
-        return objIndex === 0 ? `登録日: ${time}\n\n${entry}` : entry;
+        return entry;
       })
       .join('\n');
   };
@@ -126,9 +126,25 @@ const setCalendarData = (date: CalendarDay) => {
         return acc + logTotal;
       }, 0);
 
-      const resultString: string = dayLogs
-        .map((item: DateLogs) => stringifyArray(item.logs, item.timestamp))
+      const groupedLogsByDate: Record<string, LogEntry[][]> = dayLogs.reduce(
+        (acc: Record<string, LogEntry[][]>, log: DateLogs) => {
+          const date: string = log.timestamp.split(' ')[0];
+          acc[date] = acc[date] || [];
+          acc[date].push(log.logs);
+          return acc;
+        },
+        {},
+      );
+
+      const resultString: string = Object.entries(groupedLogsByDate)
+        .map(([date, groupedLogs]: [string, LogEntry[][]]) => {
+          const logsString: string = groupedLogs
+            .map((groupedLog: LogEntry[]) => stringifyArray(groupedLog))
+            .join('\n');
+          return `登録日: ${date}\n\n${logsString}`;
+        })
         .join('\n\n\n');
+
       selectedDateLogs.value = resultString;
     } else {
       isExistData.value = false;
