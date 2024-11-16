@@ -53,8 +53,9 @@ const compareDates = (dateStr1: string, dateStr2: string) => {
   return date1 && date2 && date1.getTime() === date2.getTime();
 };
 const disabledFlg = () => {
+  if (!props.date) return true;
   if (props.btnText === '追加') return false;
-  if (!props.date || !props.dateLogs.length) return true;
+  if (!props.dateLogs.length) return true;
   const isIncludesDay: boolean = Array.from(props.dateLogs).some((date: DateLogs) => {
     return compareDates(props.date, date.registered_date);
   });
