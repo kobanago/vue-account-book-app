@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import categories from 'samples/features/data/category.json';
-import subcategories from 'samples/features/data/subcategories.json';
 import { type Ref, ref } from 'vue';
 import type { DateLogs, LogEntry } from '../elements/CalendarEl.vue';
+import AddDialogContents from './AddDialogContents.vue';
 
 // eslint-disable-next-line @typescript-eslint/typedef
 const props = defineProps<{ date: string; btnText: string; dateLogs: DateLogs[] }>();
@@ -14,15 +13,10 @@ const emits: (evt: 'setSavedRecord', log: LogEntry[], btnText: string) => void =
 ]);
 const recordAry: Ref<LogEntry[]> = ref([]);
 
-const setRecord = () => {
-  const record: LogEntry = {
-    price: price.value,
-    category_id: selectedCategoryId.value,
-    subcategory_id: selectedSubcategoryId.value,
-  };
+const setRecord = (record: LogEntry) => {
   recordAry.value.push(record);
   emits('setSavedRecord', recordAry.value, props.btnText);
-  alert('データが登録されました！');
+  alert(`データが${props.btnText}されました！`);
   initDate();
 };
 const initDate = () => {
@@ -71,55 +65,7 @@ const disabledFlg = () => {
           <v-btn v-bind="activatorProps" :text="btnText" :disabled="disabledFlg()"></v-btn>
         </template>
 
-        <v-card>
-          <v-card-title class="headline">{{ date }}</v-card-title>
-          <v-card-text>
-            <v-row>
-              <v-col cols="12" md="4" sm="6">
-                <v-text-field
-                  v-model.number="price"
-                  label="Price"
-                  type="number"
-                  required
-                ></v-text-field>
-              </v-col>
-
-              <v-col cols="12" sm="6">
-                <v-select
-                  v-model="selectedCategoryId"
-                  label="Category"
-                  :items="categories"
-                  item-title="category"
-                  item-value="id"
-                ></v-select>
-              </v-col>
-            </v-row>
-
-            <v-row v-show="selectedCategoryId">
-              <v-col cols="12" sm="6">
-                <v-select
-                  v-model="selectedSubcategoryId"
-                  label="Subcategory"
-                  :items="subcategories[selectedCategoryId].subcategories"
-                  item-title="category"
-                  item-value="id"
-                ></v-select>
-              </v-col>
-            </v-row>
-
-            <small class="text-caption text-medium-emphasis">*indicates required field</small>
-          </v-card-text>
-
-          <v-divider></v-divider>
-          <v-btn
-            elevation="12"
-            color="primary"
-            text="Save"
-            variant="tonal"
-            :disabled="!price || 0 >= price"
-            @click="setRecord"
-          ></v-btn>
-        </v-card>
+        <AddDialogContents :date="date" :btn-text="btnText" @add-record="setRecord" />
       </v-dialog>
     </v-col>
   </v-container>
