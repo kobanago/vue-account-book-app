@@ -64,9 +64,10 @@ watch(
 
     <v-divider></v-divider>
     <v-btn
+      class="w-100"
       elevation="12"
       color="primary"
-      text="Save"
+      text="SAVE"
       variant="tonal"
       :disabled="!price || 0 >= price"
       @click="emits('addRecord', log)"
