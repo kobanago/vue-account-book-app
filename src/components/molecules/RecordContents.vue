@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { BTN_TEXT } from '@/common/const';
 import CalendarEl, { type DateLogs, type LogEntry } from '@/components/elements/CalendarEl.vue';
 import TitleEl from '@/components/elements/TitleEl.vue';
 import EditDialog from '@/components/molecules/EditDialog.vue';
@@ -14,7 +15,7 @@ const dates: Ref<Date[]> = ref(logsData.map((log: DateLogs) => new Date(log.regi
 const targetDate: Ref<string> = ref('');
 const displayTargetDate: Ref<string> = ref('');
 const dataUpdatedCount: Ref<number> = ref(0);
-const btnTextArray: Ref<string[]> = ref(['追加', '編集', '削除']);
+const btnTextArray: Ref<string[]> = ref(BTN_TEXT);
 const setDate = (date: CalendarDay) => {
   targetDate.value = date.noonDate.toLocaleDateString();
   displayTargetDate.value = date.ariaLabel;

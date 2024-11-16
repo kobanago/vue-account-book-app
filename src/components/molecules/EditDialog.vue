@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { BTN_TEXT } from '@/common/const';
 import { type Ref, ref } from 'vue';
 import type { DateLogs, LogEntry } from '../elements/CalendarEl.vue';
 import AddDialogContents from './AddDialogContents.vue';
@@ -48,7 +49,7 @@ const compareDates = (dateStr1: string, dateStr2: string) => {
 };
 const disabledFlg = () => {
   if (!props.date) return true;
-  if (props.btnText === '追加') return false;
+  if (props.btnText === BTN_TEXT[0]) return false;
   if (!props.dateLogs.length) return true;
   const isIncludesDay: boolean = Array.from(props.dateLogs).some((date: DateLogs) => {
     return compareDates(props.date, date.registered_date);
@@ -64,8 +65,15 @@ const disabledFlg = () => {
         <template #activator="{ props: activatorProps }">
           <v-btn v-bind="activatorProps" :text="btnText" :disabled="disabledFlg()"></v-btn>
         </template>
-
-        <AddDialogContents :date="date" :btn-text="btnText" @add-record="setRecord" />
+        <v-card v-if="btnText === BTN_TEXT[0]">
+          <AddDialogContents :date="date" @add-record="setRecord" />
+        </v-card>
+        <v-card v-if="btnText === BTN_TEXT[1]">
+          <AddDialogContents :date="date" @fix-record="setRecord" />
+        </v-card>
+        <v-card v-if="btnText === BTN_TEXT[2]">
+          <AddDialogContents :date="date" @add-record="setRecord" />
+        </v-card>
       </v-dialog>
     </v-col>
   </v-container>
