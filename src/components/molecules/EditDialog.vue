@@ -8,7 +8,6 @@ import type { DateLogs, LogEntry } from '../elements/CalendarEl.vue';
 const props = defineProps<{ date: string; btnText: string; dateLogs: DateLogs[] }>();
 const selectedCategoryId: Ref<number> = ref(0);
 const selectedSubcategoryId: Ref<number> = ref(0);
-const isOpenDialog: Ref<boolean> = ref(false);
 const price: Ref<number> = ref(0);
 const emits: (evt: 'setSavedRecord', log: LogEntry[], btnText: string) => void = defineEmits([
   'setSavedRecord',
@@ -22,15 +21,16 @@ const setRecord = () => {
     subcategory_id: selectedSubcategoryId.value,
   };
   recordAry.value.push(record);
+  emits('setSavedRecord', recordAry.value, props.btnText);
+  alert('データが登録されました！');
+  initDate();
+};
+const initDate = () => {
   //初期化
   price.value = 0;
   selectedCategoryId.value = 0;
   selectedSubcategoryId.value = 0;
-  alert('データが登録されました！');
-};
-const closeDialog = () => {
-  isOpenDialog.value = false;
-  emits('setSavedRecord', recordAry.value, props.btnText);
+  recordAry.value = [];
 };
 const parseDate = (dateStr: string) => {
   // '2024/7/23' の形式を処理
@@ -66,7 +66,7 @@ const disabledFlg = () => {
 <template>
   <v-container>
     <v-col>
-      <v-dialog v-model="isOpenDialog" width="auto" scrollable>
+      <v-dialog width="auto" scrollable>
         <template #activator="{ props: activatorProps }">
           <v-btn v-bind="activatorProps" :text="btnText" :disabled="disabledFlg()"></v-btn>
         </template>
@@ -111,18 +111,14 @@ const disabledFlg = () => {
           </v-card-text>
 
           <v-divider></v-divider>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn text="Close" variant="plain" @click="closeDialog"></v-btn>
-            <v-btn
-              color="primary"
-              text="Save"
-              variant="tonal"
-              :disabled="!price || 0 >= price"
-              @click="setRecord"
-            ></v-btn>
-          </v-card-actions>
+          <v-btn
+            elevation="12"
+            color="primary"
+            text="Save"
+            variant="tonal"
+            :disabled="!price || 0 >= price"
+            @click="setRecord"
+          ></v-btn>
         </v-card>
       </v-dialog>
     </v-col>
