@@ -1,16 +1,21 @@
 <script setup lang="ts">
 import { BTN_TEXT } from '@/common/const';
 import { parseDate } from '@/common/func';
-import type { DateLogs, LogEntry } from '@/common/types';
-import { type Ref, ref } from 'vue';
+import type { DateLogs, EditDaialogEmits, LogEntry } from '@/common/types';
 import AddDialogContents from './AddDialogContents.vue';
 import FixDialogContents from './FixDialogContents.vue';
 
 // eslint-disable-next-line @typescript-eslint/typedef
-const props = defineProps<{ date: string; btnText: string; dateLogs: DateLogs[] }>();
-const recordAry: Ref<LogEntry[]> = ref([]);
-const setRecord = (record: LogEntry) => {
-  recordAry.value.push(record);
+const props = defineProps<{
+  date: string;
+  btnText: string;
+  dateLogs: DateLogs[];
+  dataUpdatedCount?: number;
+}>();
+
+const emits: EditDaialogEmits = defineEmits<EditDaialogEmits>();
+const setRecord = (addFlg: boolean, removeFlg: boolean, record: LogEntry | DateLogs) => {
+  emits('setSavedRecord', record, addFlg, removeFlg);
   alert(`データが${props.btnText}されました！`);
 };
 const compareDates = (dateStr1: string, dateStr2: string): boolean | null => {

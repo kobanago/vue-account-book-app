@@ -1,11 +1,16 @@
 <script setup lang="ts">
-import type { LogEntry } from '@/common/types';
+import type { DateLogs, LogEntry } from '@/common/types';
 import categories from 'samples/features/data/category.json';
 import subcategories from 'samples/features/data/subcategories.json';
 import { type Ref, inject, ref, watch } from 'vue';
 
 defineProps<{ date: string }>();
-const emits: (evt: 'addRecord', log: LogEntry) => void = defineEmits(['addRecord']);
+const emits: (
+  evt: 'addRecord',
+  addFlg: boolean,
+  removeFlg: boolean,
+  record: LogEntry | DateLogs,
+) => void = defineEmits(['addRecord']);
 const recordId: Ref<number> = inject<Ref<number>>('recordId', ref(0));
 const countUpRecordId: () => void = inject<() => void>('countUpRecordId', () => {
   console.log('countUpRecordId');
