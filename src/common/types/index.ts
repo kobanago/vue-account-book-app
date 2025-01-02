@@ -26,13 +26,4 @@ export type SubCategory = {
   id: number;
   subcategories: SubCategoryEntry[];
 };
-export type EditDaialogEmits = {
-  (evt: 'setSavedRecord', log: LogEntry | DateLogs, isAdd: boolean, isRemove: boolean): void;
-  (evt: 'countUpRecordId'): void;
-};
-export type FixDaialogEmits = (
-  evt: 'fixRecord',
-  addFlg: boolean,
-  removeFlg: boolean,
-  newLogValue: LogEntry | DateLogs,
-) => void;
+export type SetRecordEmits = (evt: 'setRecord', removeId: number, record?: LogEntry) => void;

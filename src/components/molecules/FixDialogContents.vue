@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getTargetDayLogs, groupedLogsByDate, parseDate } from '@/common/func';
-import type { DateLogs, LogEntry, SubCategoryEntry } from '@/common/types';
+import type { DateLogs, LogEntry, SetRecordEmits, SubCategoryEntry } from '@/common/types';
 import categoryData from 'samples/features/data/category.json';
 import subCategoryData from 'samples/features/data/subcategories.json';
 import { type ComputedRef, type Ref, computed, inject, ref, watch } from 'vue';
@@ -10,15 +10,10 @@ const props = defineProps<{
   date: string;
   dateLogs: DateLogs[];
 }>();
-const emits: (
-  evt: 'fixRecord',
-  addFlg: boolean,
-  removeFlg: boolean,
-  record: LogEntry | DateLogs,
-) => void = defineEmits(['fixRecord']);
+const emits: SetRecordEmits = defineEmits(['setRecord']);
 const recordId: Ref<number> = inject<Ref<number>>('recordId', ref(0));
 const countUpRecordId: () => void = inject<() => void>('countUpRecordId', () => {
-  console.log('countUpRecordId');
+  console.log('RecordIdError');
 });
 const targetDay: Date | null = parseDate(props.date);
 const selectDayLogs: DateLogs[] | null = targetDay
@@ -76,33 +71,10 @@ const clickHandlerFixBtn = () => {
     subcategory_id: selectedSubcategoryId.value,
   };
 
-  emits('fixRecord', true, false, newLog.value);
-  const removeLog: DateLogs | undefined = removeSelectedLogs();
-  if (!removeLog) return;
-  emits('fixRecord', false, true, removeLog);
+  emits('setRecord', 0, newLog.value);
+  if (!selectedLogs.value?.id) return;
+  emits('setRecord', selectedLogs.value.id, undefined);
   initDate();
-};
-
-const removeSelectedLogs = () => {
-  if (!groupedLogs || !selectDayLogs || !selectedLogs.value || !selectedDate.value) return;
-  const { category_id, subcategory_id, price }: LogEntry = selectedLogs.value;
-  const target: DateLogs | undefined = selectDayLogs.find(
-    (logs: DateLogs) => logs.timestamp.split(' ')[0] === selectedDate.value,
-  );
-  if (!target) return;
-  const targetLogs: LogEntry[] = target.logs.filter(
-    (log: LogEntry) =>
-      log.category_id !== category_id ||
-      log.subcategory_id !== subcategory_id ||
-      log.price !== price,
-  );
-  const targetDateLogs: DateLogs = {
-    id: target.id,
-    timestamp: target.timestamp,
-    registered_date: target.registered_date,
-    logs: targetLogs,
-  };
-  return targetDateLogs;
 };
 
 watch(

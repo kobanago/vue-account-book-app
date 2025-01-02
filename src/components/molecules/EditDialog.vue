@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { BTN_TEXT } from '@/common/const';
 import { parseDate } from '@/common/func';
-import type { DateLogs, EditDaialogEmits, LogEntry } from '@/common/types';
+import type { DateLogs, LogEntry, SetRecordEmits } from '@/common/types';
 import AddDialogContents from './AddDialogContents.vue';
 import FixDialogContents from './FixDialogContents.vue';
 
@@ -13,9 +13,9 @@ const props = defineProps<{
   dataUpdatedCount?: number;
 }>();
 
-const emits: EditDaialogEmits = defineEmits<EditDaialogEmits>();
-const setRecord = (addFlg: boolean, removeFlg: boolean, record: LogEntry | DateLogs) => {
-  emits('setSavedRecord', record, addFlg, removeFlg);
+const emits: SetRecordEmits = defineEmits(['setRecord']);
+const setRecord = (removeId: number, record?: LogEntry) => {
+  emits('setRecord', removeId, record);
   alert(`データが${props.btnText}されました！`);
 };
 const compareDates = (dateStr1: string, dateStr2: string): boolean | null => {
@@ -42,18 +42,18 @@ const disabledFlg = () => {
           <v-btn v-bind="activatorProps" :text="btnText" :disabled="disabledFlg()"></v-btn>
         </template>
         <v-card v-if="btnText === BTN_TEXT[0]">
-          <AddDialogContents :date="date" @add-record="setRecord" />
+          <AddDialogContents :date="date" @set-record="setRecord" />
         </v-card>
         <v-card v-if="btnText === BTN_TEXT[1]">
           <FixDialogContents
             :key="dataUpdatedCount"
             :date="date"
             :date-logs="dateLogs"
-            @fix-record="setRecord"
+            @set-record="setRecord"
           />
         </v-card>
         <v-card v-if="btnText === BTN_TEXT[2]">
-          <AddDialogContents :date="date" @add-record="setRecord" />
+          <AddDialogContents :date="date" @set-record="setRecord" />
         </v-card>
       </v-dialog>
     </v-col>

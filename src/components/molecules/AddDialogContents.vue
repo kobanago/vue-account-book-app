@@ -1,19 +1,14 @@
 <script setup lang="ts">
-import type { DateLogs, LogEntry } from '@/common/types';
+import type { LogEntry, SetRecordEmits } from '@/common/types';
 import categories from 'samples/features/data/category.json';
 import subcategories from 'samples/features/data/subcategories.json';
 import { type Ref, inject, ref, watch } from 'vue';
 
 defineProps<{ date: string }>();
-const emits: (
-  evt: 'addRecord',
-  addFlg: boolean,
-  removeFlg: boolean,
-  record: LogEntry | DateLogs,
-) => void = defineEmits(['addRecord']);
+const emits: SetRecordEmits = defineEmits(['setRecord']);
 const recordId: Ref<number> = inject<Ref<number>>('recordId', ref(0));
 const countUpRecordId: () => void = inject<() => void>('countUpRecordId', () => {
-  console.log('countUpRecordId');
+  console.log('RecordIdError');
 });
 const selectedCategoryId: Ref<number> = ref(0);
 const selectedSubcategoryId: Ref<number> = ref(0);
@@ -31,7 +26,7 @@ const initDate = () => {
 };
 const clickHandlerAddBtn = () => {
   countUpRecordId();
-  emits('addRecord', true, false, log.value);
+  emits('setRecord', 0, log.value);
   initDate();
 };
 

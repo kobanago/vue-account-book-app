@@ -24,13 +24,13 @@ const setDate = (date: CalendarDay) => {
   targetDate.value = date.noonDate.toLocaleDateString();
   displayTargetDate.value = date.ariaLabel;
 };
-const setRecord = (record: LogEntry | DateLogs, isAdd: boolean, isRemove: boolean) => {
-  if (isAdd) createNewData(record as unknown as LogEntry);
-  if (isRemove) removeData(record as unknown as DateLogs);
+const setRecord = (removeId: number, record?: LogEntry) => {
+  if (!removeId && record) createNewData(record);
+  if (removeId) removeData(removeId);
 };
 const emits: (evt: 'countUpLogsId') => void = defineEmits(['countUpLogsId']);
 const createNewData = (record: LogEntry) => {
-  const existRegisterDay = data.value.find(
+  const existRegisterDay: DateLogs | undefined = data.value.find(
     (item: DateLogs) =>
       item.registered_date === targetDate.value &&
       item.timestamp.split(' ')[0] === new Date().toLocaleString().split(' ')[0],
@@ -54,19 +54,15 @@ const createNewData = (record: LogEntry) => {
   }
 };
 
-const removeData = (record: DateLogs) => {
-  const updatedData = data.value.map((item) => {
-    if (item.id !== record.id) return item;
-    return {
-      ...item,
-      logs: record.logs,
-    };
-  });
+const removeData = (id: number) => {
+  const updatedData: DateLogs[] = data.value.filter((item: DateLogs) =>
+    item.logs.filter((log: LogEntry) => log.id !== id),
+  );
   data.value = [...updatedData];
 };
 
 watch(
-  () => data.value.map((item) => ({ ...item })),
+  () => data.value.map((item: DateLogs) => ({ ...item })),
   () => {
     dataUpdatedCount.value++;
   },
@@ -85,7 +81,7 @@ watch(
           :btn-text="btnText"
           :date-logs="data"
           :data-updated-count="dataUpdatedCount"
-          @set-saved-record="setRecord"
+          @set-record="setRecord"
         />
       </v-col>
     </v-row>
