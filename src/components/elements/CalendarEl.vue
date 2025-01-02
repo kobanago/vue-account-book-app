@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { getTargetDayLogs, groupedLogsByDate } from '@/common/func';
 import type {
   CategoryEntry,
   DateLogs,
@@ -94,9 +95,7 @@ const setCalendarData = (date: CalendarDay) => {
   const reflectData = (isExistDay: boolean, day: Date): void => {
     if (isExistDay) {
       isExistData.value = true;
-      const dayLogs: DateLogs[] = props.dateLogs.filter((item: DateLogs) => {
-        return item.registered_date === day.toLocaleDateString();
-      });
+      const dayLogs: DateLogs[] = getTargetDayLogs(props.dateLogs, day);
 
       dayTotal.value = dayLogs.reduce((acc: number, log: DateLogs) => {
         const logTotal: number = log.logs.reduce((logAcc: number, entry: LogEntry) => {
@@ -105,17 +104,7 @@ const setCalendarData = (date: CalendarDay) => {
         return acc + logTotal;
       }, 0);
 
-      const groupedLogsByDate: Record<string, LogEntry[][]> = dayLogs.reduce(
-        (acc: Record<string, LogEntry[][]>, log: DateLogs) => {
-          const date: string = log.timestamp.split(' ')[0];
-          acc[date] = acc[date] || [];
-          acc[date].push(log.logs);
-          return acc;
-        },
-        {},
-      );
-
-      const resultString: string = Object.entries(groupedLogsByDate)
+      const resultString: string = Object.entries(groupedLogsByDate(dayLogs))
         .map(([date, groupedLogs]: [string, LogEntry[][]]) => {
           const logsString: string = groupedLogs
             .map((groupedLog: LogEntry[]) => stringifyArray(groupedLog))
