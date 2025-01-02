@@ -4,11 +4,23 @@ import ConsiderContents from '@/components/molecules/ConsiderContents.vue';
 import RecordContents from '@/components/molecules/RecordContents.vue';
 import WatchContents from '@/components/molecules/WatchContents.vue';
 import logsData from 'samples/features/data/logs.json';
-import { type Ref, ref } from 'vue';
+import { type Ref, provide, ref } from 'vue';
 
 const items: Ref<string[]> = ref(['Watch', 'Record', 'Consider']);
-const tab: Ref<string> = ref('Watch');
+const tab: Ref<string> = ref('Record');
 const logs: Ref<DateLogs[]> = ref(logsData);
+const logsLen: number = logsData.length;
+const recordLen: number = logsData.reduce(
+  (total: number, item: DateLogs) => total + item.logs.length,
+  0,
+);
+const logTotalLastNum: Ref<number> = ref(logsLen + 1);
+const recordTotalLastNum: Ref<number> = ref(recordLen + 1);
+const countUpLogsId = () => ++logTotalLastNum.value;
+const countUpRecordId = () => ++recordTotalLastNum.value;
+provide('recordId', recordTotalLastNum);
+provide('countUpRecordId', countUpRecordId);
+
 const text: string =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
 </script>
@@ -32,7 +44,11 @@ const text: string =
             <WatchContents :logs="logs" />
           </v-card>
           <v-card v-else-if="tab === items[1]">
-            <RecordContents :logs="logs" />
+            <RecordContents
+              :logs="logs"
+              :logs-id="logTotalLastNum"
+              @count-up-logs-id="countUpLogsId"
+            />
           </v-card>
           <v-card v-else-if="tab === items[2]">
             <ConsiderContents />

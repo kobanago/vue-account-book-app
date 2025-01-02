@@ -1,4 +1,5 @@
 export type LogEntry = {
+  id: number;
   category_id: number;
   subcategory_id: number;
   price: number;
@@ -24,4 +25,8 @@ export type SubCategoryEntry = {
 export type SubCategory = {
   id: number;
   subcategories: SubCategoryEntry[];
+};
+export type EditDaialogEmits = {
+  (evt: 'setSavedRecord', log: LogEntry | DateLogs, isAdd: boolean, isRemove: boolean): void;
+  (evt: 'countUpRecordId'): void;
 };

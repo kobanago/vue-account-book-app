@@ -10,7 +10,10 @@ import { type Ref, ref } from 'vue';
 import CalendarEl from '../elements/CalendarEl.vue';
 
 // eslint-disable-next-line @typescript-eslint/typedef
-const props = defineProps<{ logs: DateLogs[] }>();
+const props = defineProps<{
+  logs: DateLogs[];
+  logsId: number;
+}>();
 const data: Ref<DateLogs[]> = ref(props.logs);
 const dates: Ref<Date[]> = ref(logsData.map((log: DateLogs) => new Date(log.registered_date)));
 const targetDate: Ref<string> = ref('');
@@ -21,27 +24,29 @@ const setDate = (date: CalendarDay) => {
   targetDate.value = date.noonDate.toLocaleDateString();
   displayTargetDate.value = date.ariaLabel;
 };
-const setRecord = (record: LogEntry[], btnText: string) => {
-  switch (btnText) {
-    case btnTextArray.value[0]:
-      createNewData(record);
-      break;
-    case btnTextArray.value[1]:
-      createNewData(record);
-      break;
-    case btnTextArray.value[2]:
-      createNewData(record);
-      break;
-  }
+const setRecord = (record: LogEntry | DateLogs, isAdd: boolean, isRemove: boolean) => {
+  if (isAdd) createNewData(record as unknown as LogEntry);
+  if (isRemove) removeData(record as unknown as DateLogs);
 };
-const createNewData = (record: LogEntry[]) => {
-  const newData: DateLogs = {
-    id: data.value.length + 1,
-    registered_date: targetDate.value,
-    timestamp: new Date().toLocaleString(),
-    logs: record,
-  };
-  data.value.push(newData);
+const emits: (evt: 'countUpLogsId') => void = defineEmits(['countUpLogsId']);
+const createNewData = (record: LogEntry) => {
+  const existRegisterDay = data.value.find(
+    (item: DateLogs) =>
+      item.registered_date === targetDate.value &&
+      item.timestamp.split(' ')[0] === new Date().toLocaleString().split(' ')[0],
+  );
+  if (existRegisterDay) {
+    existRegisterDay.logs.push(record);
+  } else {
+    emits('countUpLogsId');
+    const newData: DateLogs = {
+      id: props.logsId,
+      registered_date: targetDate.value,
+      timestamp: new Date().toLocaleString(),
+      logs: [record],
+    };
+    data.value.push(newData);
+  }
 
   const newDate: Date = new Date(targetDate.value);
   if (!dates.value.some((date: Date) => date.toDateString() === newDate.toDateString())) {
@@ -49,9 +54,24 @@ const createNewData = (record: LogEntry[]) => {
   }
 };
 
-watch(data.value, () => {
-  dataUpdatedCount.value++;
-});
+const removeData = (record: DateLogs) => {
+  const updatedData = data.value.map((item) => {
+    if (item.id !== record.id) return item;
+    return {
+      ...item,
+      logs: record.logs,
+    };
+  });
+  data.value = [...updatedData];
+};
+
+watch(
+  () => data.value.map((item) => ({ ...item })),
+  () => {
+    dataUpdatedCount.value++;
+  },
+  { deep: true },
+);
 </script>
 
 <template>
@@ -64,6 +84,7 @@ watch(data.value, () => {
           :date="displayTargetDate"
           :btn-text="btnText"
           :date-logs="data"
+          :data-updated-count="dataUpdatedCount"
           @set-saved-record="setRecord"
         />
       </v-col>

@@ -2,14 +2,19 @@
 import type { LogEntry } from '@/common/types';
 import categories from 'samples/features/data/category.json';
 import subcategories from 'samples/features/data/subcategories.json';
-import { type Ref, ref, watch } from 'vue';
+import { type Ref, inject, ref, watch } from 'vue';
 
 defineProps<{ date: string }>();
+const emits: (evt: 'addRecord', log: LogEntry) => void = defineEmits(['addRecord']);
+const recordId: Ref<number> = inject<Ref<number>>('recordId', ref(0));
+const countUpRecordId: () => void = inject<() => void>('countUpRecordId', () => {
+  console.log('countUpRecordId');
+});
 const selectedCategoryId: Ref<number> = ref(0);
 const selectedSubcategoryId: Ref<number> = ref(0);
 const price: Ref<number> = ref(0);
-const emits: (evt: 'addRecord', log: LogEntry) => void = defineEmits(['addRecord']);
 const log: Ref<LogEntry> = ref<LogEntry>({
+  id: 0,
   price: 0,
   category_id: 0,
   subcategory_id: 0,
@@ -20,7 +25,8 @@ const initDate = () => {
   selectedSubcategoryId.value = 0;
 };
 const clickHandlerAddBtn = () => {
-  emits('addRecord', log.value);
+  countUpRecordId();
+  emits('addRecord', true, false, log.value);
   initDate();
 };
 
@@ -28,6 +34,7 @@ watch(
   [price, selectedCategoryId, selectedSubcategoryId],
   ([newPrice, newCategoryId, newSubcategoryId]: [number, number, number]) => {
     log.value = {
+      id: recordId.value,
       price: newPrice,
       category_id: newCategoryId,
       subcategory_id: newSubcategoryId,
