@@ -30,3 +30,9 @@ export type EditDaialogEmits = {
   (evt: 'setSavedRecord', log: LogEntry | DateLogs, isAdd: boolean, isRemove: boolean): void;
   (evt: 'countUpRecordId'): void;
 };
+export type FixDaialogEmits = (
+  evt: 'fixRecord',
+  addFlg: boolean,
+  removeFlg: boolean,
+  newLogValue: LogEntry | DateLogs,
+) => void;
