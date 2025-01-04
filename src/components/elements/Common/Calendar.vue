@@ -13,7 +13,7 @@ import { Calendar as VCalendar } from 'v-calendar';
 import type { CalendarDay } from 'v-calendar/dist/types/src/utils/page.js';
 import 'v-calendar/style.css';
 import { type Ref, ref, watch } from 'vue';
-import Detail from './Common/Detail.vue';
+import Detail from './Detail.vue';
 
 // eslint-disable-next-line @typescript-eslint/typedef
 const props = defineProps<{

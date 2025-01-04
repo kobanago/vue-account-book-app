@@ -7,7 +7,7 @@ import logsData from 'samples/features/data/logs.json';
 import type { CalendarDay } from 'v-calendar/dist/types/src/utils/page.js';
 import { watch } from 'vue';
 import { type Ref, ref } from 'vue';
-import Calendar from '../elements/Common/Calendar.vue';
+import Calendar from '../../elements/Common/Calendar.vue';
 
 // eslint-disable-next-line @typescript-eslint/typedef
 const props = defineProps<{
