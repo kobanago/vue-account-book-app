@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { getTargetDayLogs, groupedLogsByDate } from '@/common/func';
 import type {
   CategoryEntry,
   DateLogs,
@@ -7,13 +6,14 @@ import type {
   SubCategory,
   SubCategoryEntry,
 } from '@/common/types';
+import { getTargetDayLogs, groupedLogsByDate } from '@/common/utiles';
 import categoryData from 'samples/features/data/category.json';
 import subCategoryData from 'samples/features/data/subcategories.json';
 import { Calendar as VCalendar } from 'v-calendar';
 import type { CalendarDay } from 'v-calendar/dist/types/src/utils/page.js';
 import 'v-calendar/style.css';
 import { type Ref, ref, watch } from 'vue';
-import CalendarWatch from './CalendarWatch.vue';
+import Detail from './Common/Detail.vue';
 
 // eslint-disable-next-line @typescript-eslint/typedef
 const props = defineProps<{
@@ -149,7 +149,7 @@ watch(
             <v-card-title class="text-center justify-center py-2">{{
               selectedDate?.ariaLabel
             }}</v-card-title>
-            <CalendarWatch
+            <Detail
               :total="dayTotal"
               :is-exist-data="isExistData"
               :selected-date-logs="selectedDateLogs"

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { BTN_TEXT } from '@/common/const';
-import { parseDate } from '@/common/func';
 import type { DateLogs, LogEntry, SetRecordEmits } from '@/common/types';
-import AddDialogContents from './AddDialogContents.vue';
-import FixDialogContents from './FixDialogContents.vue';
+import { parseDate } from '@/common/utiles';
+import Add from './DialogContents/Add.vue';
+import Fix from './DialogContents/Fix.vue';
 
 // eslint-disable-next-line @typescript-eslint/typedef
 const props = defineProps<{
@@ -42,18 +42,13 @@ const disabledFlg = () => {
           <v-btn v-bind="activatorProps" :text="btnText" :disabled="disabledFlg()"></v-btn>
         </template>
         <v-card v-if="btnText === BTN_TEXT[0]">
-          <AddDialogContents :date="date" @set-record="setRecord" />
+          <Add :date="date" @set-record="setRecord" />
         </v-card>
         <v-card v-if="btnText === BTN_TEXT[1]">
-          <FixDialogContents
-            :key="dataUpdatedCount"
-            :date="date"
-            :date-logs="dateLogs"
-            @set-record="setRecord"
-          />
+          <Fix :key="dataUpdatedCount" :date="date" :date-logs="dateLogs" @set-record="setRecord" />
         </v-card>
         <v-card v-if="btnText === BTN_TEXT[2]">
-          <AddDialogContents :date="date" @set-record="setRecord" />
+          <Add :key="dataUpdatedCount" :date="date" :date-logs="dateLogs" @set-record="setRecord" />
         </v-card>
       </v-dialog>
     </v-col>

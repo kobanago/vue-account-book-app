@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { getTargetDayLogs, groupedLogsByDate, parseDate } from '@/common/func';
 import type { DateLogs, LogEntry, SetRecordEmits, SubCategoryEntry } from '@/common/types';
+import { getTargetDayLogs, groupedLogsByDate, parseDate } from '@/common/utiles';
 import categoryData from 'samples/features/data/category.json';
 import subCategoryData from 'samples/features/data/subcategories.json';
 import { type ComputedRef, type Ref, computed, inject, ref, watch } from 'vue';

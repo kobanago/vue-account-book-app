@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { DateLogs, LogEntry } from '@/common/types';
-import CalendarEl from '@/components/elements/CalendarEl.vue';
-import PriceEl from '@/components/elements/PriceEl.vue';
-import TitleEl from '@/components/elements/TitleEl.vue';
+import Calendar from '@/components/elements/Common/Calendar.vue';
+import Title from '@/components/elements/Common/Title.vue';
+import Price from '@/components/elements/Watch/Price.vue';
 import { type Ref, reactive, ref } from 'vue';
 
 // eslint-disable-next-line @typescript-eslint/typedef
@@ -34,11 +34,11 @@ const expenses: Ref<number> = ref(totalExpense);
 
 <template>
   <v-col>
-    <TitleEl :title="`今月の収支(${todayStr}時点)`" />
+    <Title :title="`今月の収支(${todayStr}時点)`" />
     <v-row justify="center">
-      <PriceEl title="収入" :total="incomes" font-color="text-light-green-darken-3" />
-      <PriceEl title="支出" :total="expenses" font-color="text-red-darken-4" />
+      <Price title="収入" :total="incomes" font-color="text-light-green-darken-3" />
+      <Price title="支出" :total="expenses" font-color="text-red-darken-4" />
     </v-row>
-    <CalendarEl :dates="dates" :date-logs="data" tab="WATCH" />
+    <Calendar :dates="dates" :date-logs="data" tab="WATCH" />
   </v-col>
 </template>

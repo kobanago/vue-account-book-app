@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { BTN_TEXT } from '@/common/const';
 import type { DateLogs, LogEntry } from '@/common/types';
-import TitleEl from '@/components/elements/TitleEl.vue';
+import Title from '@/components/elements/Common/Title.vue';
 import EditDialog from '@/components/molecules/EditDialog.vue';
 import logsData from 'samples/features/data/logs.json';
 import type { CalendarDay } from 'v-calendar/dist/types/src/utils/page.js';
 import { watch } from 'vue';
 import { type Ref, ref } from 'vue';
-import CalendarEl from '../elements/CalendarEl.vue';
+import Calendar from '../elements/Common/Calendar.vue';
 
 // eslint-disable-next-line @typescript-eslint/typedef
 const props = defineProps<{
@@ -72,7 +72,7 @@ watch(
 
 <template>
   <v-col>
-    <TitleEl title="記録を編集する" />
+    <Title title="記録を編集する" />
     <h3>{{ displayTargetDate ? displayTargetDate : '日付を選択してください' }}</h3>
     <v-row justify="center">
       <v-col v-for="btnText in btnTextArray" :key="btnText">
@@ -85,7 +85,7 @@ watch(
         />
       </v-col>
     </v-row>
-    <CalendarEl
+    <Calendar
       :dates="dates"
       :date-logs="data"
       :data-updated-count="dataUpdatedCount"

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { DateLogs } from '@/common/types';
-import ConsiderContents from '@/components/molecules/ConsiderContents.vue';
-import RecordContents from '@/components/molecules/RecordContents.vue';
-import WatchContents from '@/components/molecules/WatchContents.vue';
+import Consider from '@/components/templates/Contents/Consider.vue';
+import Record from '@/components/templates/Contents/Record.vue';
+import Watch from '@/components/templates/Contents/Watch.vue';
 import logsData from 'samples/features/data/logs.json';
 import { type Ref, provide, ref } from 'vue';
 
@@ -41,17 +41,13 @@ const text: string =
         <v-card color="basil" class="bg-amber-lighten-5" flat>
           <v-card-text>{{ text }}</v-card-text>
           <v-card v-if="tab === items[0]">
-            <WatchContents :logs="logs" />
+            <Watch :logs="logs" />
           </v-card>
           <v-card v-else-if="tab === items[1]">
-            <RecordContents
-              :logs="logs"
-              :logs-id="logTotalLastNum"
-              @count-up-logs-id="countUpLogsId"
-            />
+            <Record :logs="logs" :logs-id="logTotalLastNum" @count-up-logs-id="countUpLogsId" />
           </v-card>
           <v-card v-else-if="tab === items[2]">
-            <ConsiderContents />
+            <Consider />
           </v-card>
         </v-card>
       </v-window-item>
