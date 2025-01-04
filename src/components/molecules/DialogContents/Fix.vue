@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { INIT_LOG } from '@/common/const';
 import type { DateLogs, LogEntry, SetRecordEmits, SubCategoryEntry } from '@/common/types';
 import { getTargetDayLogs, groupedLogsByDate, parseDate } from '@/common/utiles';
 import categoryData from 'samples/features/data/category.json';
@@ -43,12 +44,6 @@ function getCategoryName(subcategoryId: number): string {
   }
   return `${categoryLabel} > ${subcategoryLabel}`;
 }
-const INIT_LOG: LogEntry = {
-  id: 0,
-  price: 0,
-  category_id: 0,
-  subcategory_id: 0,
-};
 const price: Ref<number> = ref(0);
 const selectedCategoryId: Ref<number> = ref(0);
 const selectedSubcategoryId: Ref<number> = ref(0);

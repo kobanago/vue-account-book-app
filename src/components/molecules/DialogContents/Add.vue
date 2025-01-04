@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { INIT_LOG } from '@/common/const';
 import type { LogEntry, SetRecordEmits } from '@/common/types';
 import categories from 'samples/features/data/category.json';
 import subcategories from 'samples/features/data/subcategories.json';
@@ -13,12 +14,7 @@ const countUpRecordId: () => void = inject<() => void>('countUpRecordId', () => 
 const selectedCategoryId: Ref<number> = ref(0);
 const selectedSubcategoryId: Ref<number> = ref(0);
 const price: Ref<number> = ref(0);
-const log: Ref<LogEntry> = ref<LogEntry>({
-  id: 0,
-  price: 0,
-  category_id: 0,
-  subcategory_id: 0,
-});
+const log: Ref<LogEntry> = ref<LogEntry>(INIT_LOG);
 const initDate = () => {
   price.value = 0;
   selectedCategoryId.value = 0;
