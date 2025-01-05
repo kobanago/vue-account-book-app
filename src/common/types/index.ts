@@ -1,3 +1,5 @@
+import type { Ref } from 'vue';
+
 export type LogEntry = {
   id: number;
   category_id: number;
@@ -27,3 +29,4 @@ export type SubCategory = {
   subcategories: SubCategoryEntry[];
 };
 export type SetRecordEmits = (evt: 'setRecord', removeId: number, record?: LogEntry) => void;
+export type ChangeRecordRefEmits = (evt: 'changeRecord', target: Ref<number>, val: number) => void;

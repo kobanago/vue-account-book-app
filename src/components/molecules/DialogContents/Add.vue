@@ -1,88 +1,49 @@
 <script setup lang="ts">
-import { INIT_LOG } from '@/common/const';
-import type { LogEntry, SetRecordEmits } from '@/common/types';
-import categories from 'samples/features/data/category.json';
-import subcategories from 'samples/features/data/subcategories.json';
-import { type Ref, inject, ref, watch } from 'vue';
+import { BTN_TEXT } from '@/common/const';
+import type { SetRecordEmits } from '@/common/types';
+import UpdateRecordSave from '@/components/atoms/Buttons/UpdateRecordSave.vue';
+import { type ComputedRef, type Ref, computed, inject, ref } from 'vue';
+import Add from '../DaialogButtons/Add.vue';
 
 defineProps<{ date: string }>();
 const emits: SetRecordEmits = defineEmits(['setRecord']);
 const recordId: Ref<number> = inject<Ref<number>>('recordId', ref(0));
-const countUpRecordId: () => void = inject<() => void>('countUpRecordId', () => {
-  console.log('RecordIdError');
-});
-const selectedCategoryId: Ref<number> = ref(0);
-const selectedSubcategoryId: Ref<number> = ref(0);
+const countUpRecordId: () => void = inject<() => void>('countUpRecordId', () => {});
 const price: Ref<number> = ref(0);
-const log: Ref<LogEntry> = ref<LogEntry>(INIT_LOG);
-const initDate = () => {
-  price.value = 0;
-  selectedCategoryId.value = 0;
-  selectedSubcategoryId.value = 0;
+const categoryId: Ref<number> = ref(0);
+const subcategoryId: Ref<number> = ref(0);
+const priceRef: ComputedRef<Ref<number>> = computed(() => price);
+const categoryIdRef: ComputedRef<Ref<number>> = computed(() => categoryId);
+const subcategoryIdRef: ComputedRef<Ref<number>> = computed(() => subcategoryId);
+const changeHandlerRecordValue = (target: Ref<number>, val: number) => {
+  target.value = val;
 };
 const clickHandlerAddBtn = () => {
   countUpRecordId();
-  emits('setRecord', 0, log.value);
-  initDate();
+  emits('setRecord', 0, {
+    id: recordId.value,
+    price: price.value,
+    category_id: categoryId.value,
+    subcategory_id: subcategoryId.value,
+  });
 };
-
-watch(
-  [price, selectedCategoryId, selectedSubcategoryId],
-  ([newPrice, newCategoryId, newSubcategoryId]: [number, number, number]) => {
-    log.value = {
-      id: recordId.value,
-      price: newPrice,
-      category_id: newCategoryId,
-      subcategory_id: newSubcategoryId,
-    };
-  },
-);
 </script>
 
 <template>
   <v-card>
     <v-card-title class="headline">{{ date }}</v-card-title>
     <v-card-text>
-      <v-row>
-        <v-col cols="12" md="4" sm="6">
-          <v-text-field v-model.number="price" label="Price" type="number" required></v-text-field>
-        </v-col>
-
-        <v-col cols="12" sm="6">
-          <v-select
-            v-model="selectedCategoryId"
-            label="Category"
-            :items="categories"
-            item-title="category"
-            item-value="id"
-          ></v-select>
-        </v-col>
-      </v-row>
-
-      <v-row v-show="selectedCategoryId">
-        <v-col cols="12" sm="6">
-          <v-select
-            v-model="selectedSubcategoryId"
-            label="Subcategory"
-            :items="subcategories[selectedCategoryId].subcategories"
-            item-title="category"
-            item-value="id"
-          ></v-select>
-        </v-col>
-      </v-row>
-
-      <small class="text-caption text-medium-emphasis">*indicates required field</small>
+      <Add
+        :price-ref="priceRef"
+        :category-id-ref="categoryIdRef"
+        :subcategory-id-ref="subcategoryIdRef"
+        @change-record="changeHandlerRecordValue"
+      />
     </v-card-text>
-
-    <v-divider></v-divider>
-    <v-btn
-      class="w-100"
-      elevation="12"
-      color="primary"
-      text="SAVE"
-      variant="tonal"
-      :disabled="!price || 0 >= price"
-      @click="clickHandlerAddBtn"
-    ></v-btn>
+    <UpdateRecordSave
+      :btn-text="BTN_TEXT[0]"
+      :disable-formula="!price || 0 >= price"
+      @saved-record="clickHandlerAddBtn"
+    />
   </v-card>
 </template>
