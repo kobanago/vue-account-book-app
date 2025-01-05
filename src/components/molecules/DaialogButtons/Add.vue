@@ -2,7 +2,7 @@
 import type { ChangeRecordRefEmits } from '@/common/types';
 import categories from 'samples/features/data/category.json';
 import subcategories from 'samples/features/data/subcategories.json';
-import { type Ref, ref } from 'vue';
+import { type Ref, ref, watch } from 'vue';
 
 // eslint-disable-next-line @typescript-eslint/typedef
 const props = defineProps<{
@@ -14,6 +14,16 @@ const emits: ChangeRecordRefEmits = defineEmits(['changeRecord']);
 const price: Ref<number> = ref(0);
 const categoryId: Ref<number> = ref(0);
 const subcategoryId: Ref<number> = ref(0);
+
+watch(
+  [categoryId, subcategoryId],
+  ([newCategoryId, newSubcategoryId]: [number, number], [oldCategoryId]: [number, number]) => {
+    const updatedSubcategoryId: number =
+      newCategoryId !== oldCategoryId ? Number(`${newCategoryId}01`) : newSubcategoryId;
+    categoryId.value = newCategoryId;
+    subcategoryId.value = updatedSubcategoryId;
+  },
+);
 </script>
 
 <template>

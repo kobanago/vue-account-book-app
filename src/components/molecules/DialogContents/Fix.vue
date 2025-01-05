@@ -5,7 +5,7 @@ import { getTargetDayLogs, groupedLogsByDate, parseDate } from '@/common/utiles'
 import UpdateRecordSave from '@/components/atoms/Buttons/UpdateRecordSave.vue';
 import categoryData from 'samples/features/data/category.json';
 import subCategoryData from 'samples/features/data/subcategories.json';
-import { type ComputedRef, type Ref, computed, inject, ref, watch } from 'vue';
+import { type ComputedRef, type Ref, computed, inject, ref } from 'vue';
 import Add from '../DaialogButtons/Add.vue';
 
 // eslint-disable-next-line @typescript-eslint/typedef
@@ -68,19 +68,9 @@ const clickHandlerFixBtn = () => {
   emits('setRecord', selectedLogs.value.id, undefined);
 };
 
-watch(
-  [selectedCategoryId, selectedSubcategoryId],
-  ([newCategoryId, newSubcategoryId]: [number, number], [oldCategoryId]: [number, number]) => {
-    const updatedSubcategoryId: number =
-      newCategoryId !== oldCategoryId ? Number(`${newCategoryId}01`) : newSubcategoryId;
-    selectedCategoryId.value = newCategoryId;
-    selectedSubcategoryId.value = updatedSubcategoryId;
-  },
-);
-
-watch([selectedDate], ([newDate]: [Ref<string | null>], [oldDate]: [Ref<string | null>]) => {
-  if (newDate !== oldDate) selectedLogs.value = null;
-});
+// watch([selectedDate], ([newDate]: [Ref<string | null>], [oldDate]: [Ref<string | null>]) => {
+//   if (newDate !== oldDate) selectedLogs.value = null;
+// });
 </script>
 
 <template>
