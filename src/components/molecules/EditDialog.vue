@@ -42,7 +42,7 @@ const disabledFlg = () => {
           <v-btn v-bind="activatorProps" :text="btnText" :disabled="disabledFlg()"></v-btn>
         </template>
         <v-card v-if="btnText === BTN_TEXT[0]">
-          <Add :date="date" @set-record="setRecord" />
+          <Add :key="dataUpdatedCount" :date="date" @set-record="setRecord" />
         </v-card>
         <v-card v-if="btnText === BTN_TEXT[1]">
           <Fix :key="dataUpdatedCount" :date="date" :date-logs="dateLogs" @set-record="setRecord" />
