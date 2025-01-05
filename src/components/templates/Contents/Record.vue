@@ -55,9 +55,10 @@ const createNewData = (record: LogEntry) => {
 };
 
 const removeData = (id: number) => {
-  const updatedData: DateLogs[] = data.value.filter((item: DateLogs) =>
-    item.logs.filter((log: LogEntry) => log.id !== id),
-  );
+  const updatedData: DateLogs[] = data.value.map((item: DateLogs) => ({
+    ...item,
+    logs: item.logs.filter((log: LogEntry) => log.id !== id),
+  }));
   data.value = [...updatedData];
 };
 
