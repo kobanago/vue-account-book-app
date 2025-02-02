@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "registered_date": "2024/7/23",
+    "timestamp": "2024/7/23 12:00:00",
+    "logs": [
+      { "id": 1, "category_id": 1, "subcategory_id": 101, "price": 10000 },
+      { "id": 2, "category_id": 1, "subcategory_id": 103, "price": 50000 },
+      { "id": 3, "category_id": 2, "subcategory_id": 203, "price": 50000 },
+      { "id": 4, "category_id": 3, "subcategory_id": 301, "price": 50000 },
+      { "id": 5, "category_id": 1, "subcategory_id": 102, "price": 60000 },
+      { "id": 6, "category_id": 5, "subcategory_id": 502, "price": 10000 }
+    ]
+  },
+  {
+    "id": 2,
+    "registered_date": "2024/7/23",
+    "timestamp": "2024/7/23 15:00:00",
+    "logs": [
+      { "id": 7, "category_id": 1, "subcategory_id": 101, "price": 1000 },
+      { "id": 8, "category_id": 1, "subcategory_id": 103, "price": 3000 },
+      { "id": 9, "category_id": 5, "subcategory_id": 502, "price": 10000 },
+      { "id": 10, "category_id": 3, "subcategory_id": 301, "price": 5000 },
+      { "id": 11, "category_id": 1, "subcategory_id": 102, "price": 7000 },
+      { "id": 12, "category_id": 5, "subcategory_id": 502, "price": 10000 }
+    ]
+  },
+  {
+    "id": 3,
+    "registered_date": "2024/7/22",
+    "timestamp": "2024/7/23 15:00:00",
+    "logs": [
+      { "id": 13, "category_id": 1, "subcategory_id": 101, "price": 10000 },
+      { "id": 14, "category_id": 1, "subcategory_id": 103, "price": 50000 },
+      { "id": 15, "category_id": 5, "subcategory_id": 502, "price": 50000 },
+      { "id": 16, "category_id": 3, "subcategory_id": 301, "price": 50000 },
+      { "id": 17, "category_id": 1, "subcategory_id": 102, "price": 60000 },
+      { "id": 18, "category_id": 5, "subcategory_id": 502, "price": 10000 }
+    ]
+  },
+  {
+    "id": 4,
+    "registered_date": "2024/7/25",
+    "timestamp": "2024/7/23 15:00:00",
+    "logs": [
+      { "id": 19, "category_id": 1, "subcategory_id": 101, "price": 1000 },
+      { "id": 20, "category_id": 1, "subcategory_id": 103, "price": 3000 },
+      { "id": 21, "category_id": 5, "subcategory_id": 502, "price": 10000 },
+      { "id": 22, "category_id": 3, "subcategory_id": 301, "price": 5000 },
+      { "id": 23, "category_id": 1, "subcategory_id": 102, "price": 7000 },
+      { "id": 24, "category_id": 5, "subcategory_id": 502, "price": 10000 }
+    ]
+  },
+  {
+    "id": 5,
+    "registered_date": "2024/8/4",
+    "timestamp": "2024/8/10 15:00:00",
+    "logs": [
+      { "id": 25, "category_id": 1, "subcategory_id": 101, "price": 2000 },
+      { "id": 26, "category_id": 2, "subcategory_id": 203, "price": 4000 },
+      { "id": 27, "category_id": 3, "subcategory_id": 301, "price": 6000 },
+      { "id": 28, "category_id": 1, "subcategory_id": 102, "price": 8000 },
+      { "id": 29, "category_id": 6, "subcategory_id": 601, "price": 10000 }
+    ]
+  }
+]

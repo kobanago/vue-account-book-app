@@ -1,0 +1,150 @@
+[
+  { "id": 0, "subcategories": [{ "id": 0, "category": "選択なし" }] },
+  {
+    "id": 1,
+    "subcategories": [
+      {
+        "id": 0,
+        "category": "その他"
+      },
+      {
+        "id": 101,
+        "category": "食料品"
+      },
+      {
+        "id": 102,
+        "category": "外食"
+      },
+      {
+        "id": 103,
+        "category": "お菓子・飲み物"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "subcategories": [
+      {
+        "id": 0,
+        "category": "その他"
+      },
+      {
+        "id": 201,
+        "category": "洗剤・掃除用具"
+      },
+      {
+        "id": 202,
+        "category": "トイレタリー"
+      },
+      {
+        "id": 203,
+        "category": "文房具"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "subcategories": [
+      {
+        "id": 0,
+        "category": "その他"
+      },
+      {
+        "id": 301,
+        "category": "電車・バス"
+      },
+      {
+        "id": 302,
+        "category": "自動車"
+      },
+      {
+        "id": 303,
+        "category": "タクシー・配車サービス"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "subcategories": [
+      {
+        "id": 0,
+        "category": "その他"
+      },
+      {
+        "id": 401,
+        "category": "電気料金"
+      },
+      {
+        "id": 402,
+        "category": "ガス料金"
+      },
+      {
+        "id": 403,
+        "category": "水道料金"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "subcategories": [
+      {
+        "id": 0,
+        "category": "その他"
+      },
+      {
+        "id": 501,
+        "category": "病院・診療費"
+      },
+      {
+        "id": 502,
+        "category": "薬・処方箋"
+      },
+      {
+        "id": 503,
+        "category": "健康診断"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "subcategories": [
+      {
+        "id": 0,
+        "category": "その他"
+      },
+      {
+        "id": 601,
+        "category": "宿泊費"
+      },
+      {
+        "id": 602,
+        "category": "交通費"
+      },
+      {
+        "id": 603,
+        "category": "観光・娯楽費"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "subcategories": [
+      {
+        "id": 0,
+        "category": "その他"
+      },
+      {
+        "id": 701,
+        "category": "外食"
+      },
+      {
+        "id": 702,
+        "category": "イベント参加費"
+      },
+      {
+        "id": 703,
+        "category": "贈答品"
+      }
+    ]
+  }
+]

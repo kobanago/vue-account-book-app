@@ -1,3 +1,4 @@
+import { setupCalendar } from 'v-calendar';
 import { createApp } from 'vue';
 import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
@@ -13,4 +14,5 @@ createApp(App)
       directives,
     }),
   )
+  .use(setupCalendar, {})
   .mount('#app');
